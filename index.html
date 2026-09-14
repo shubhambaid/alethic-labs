@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alethic Labs</title>
+<meta name="description" content="Alethic keeps the state of unfinished work in the repository and compiles it into a short, cited briefing for the next coding agent. Open source.">
+<meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#12110e" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://alethic-labs.com/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Alethic Labs">
+<meta property="og:description" content="Verifiable context for coding agents. Open source.">
+<meta property="og:url" content="https://alethic-labs.com/">
+<meta property="og:image" content="https://alethic-labs.com/assets/dashboard.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f3efe6;
+    --paper-2: #ebe6da;
+    --ink: #15130f;
+    --muted: #6b645a;
+    --rule: #d9d2c3;
+    --accent: #c2502e;
+    --code-bg: #15130f;
+    --code-ink: #e9e3d6;
+    --code-muted: #8f877a;
+    --warn: #e0a33a;
+    --serif: "Instrument Serif", ui-serif, Georgia, "Times New Roman", serif;
+    --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --wrap: 1080px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #12110e;
+      --paper-2: #1b1915;
+      --ink: #ece6da;
+      --muted: #9b9386;
+      --rule: #2e2b25;
+      --accent: #ec7a52;
+      --code-bg: #0b0a08;
+      --code-ink: #e9e3d6;
+      --code-muted: #857d70;
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 17px/1.6 var(--sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  img { max-width: 100%; height: auto; display: block; }
+  code { font-family: var(--mono); font-size: .88em; }
+
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding-inline: clamp(20px, 5vw, 48px); }
+  .rule { border: 0; border-top: 1px solid var(--rule); margin: 0; }
+
+  /* Header */
+  .site-header { display: flex; align-items: center; justify-content: space-between; padding-block: 22px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 500; letter-spacing: -.005em; }
+  .brand:hover { color: inherit; }
+  .mark { width: 20px; height: 20px; flex: none; }
+  .nav { display: flex; gap: 22px; font-size: 15px; }
+  .nav a { text-decoration: none; color: var(--muted); }
+  .nav a:hover { color: var(--ink); }
+
+  /* Hero */
+  .hero { padding-block: clamp(56px, 11vw, 128px) clamp(48px, 8vw, 88px); }
+  .eyebrow { font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: .02em; margin: 0 0 28px; }
+  .eyebrow .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 10px; vertical-align: middle; transform: translateY(-1px); }
+  h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(46px, 8.4vw, 104px); line-height: .98; letter-spacing: -.02em;
+    margin: 0; max-width: 13ch;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .lede { font-size: clamp(18px, 2.1vw, 21px); line-height: 1.55; color: var(--muted); max-width: 46ch; margin: 30px 0 0; }
+  .lede strong { color: var(--ink); font-weight: 500; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 40px; }
+  .button {
+    display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 20px;
+    border-radius: 999px; background: var(--ink); color: var(--paper); text-decoration: none; font-weight: 500; font-size: 16px;
+    transition: transform .15s ease, background-color .15s ease;
+  }
+  .button:hover { color: var(--paper); transform: translateY(-1px); }
+  .button svg { width: 18px; height: 18px; }
+  .clone {
+    display: inline-flex; align-items: center; gap: 12px; min-height: 48px; padding: 0 8px 0 18px; max-width: 100%;
+    border: 1px solid var(--rule); border-radius: 999px; font-family: var(--mono); font-size: 14px; color: var(--muted);
+  }
+  .clone span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .clone span::before { content: "$ "; color: var(--accent); }
+  .copy {
+    flex: none; border: 0; background: var(--paper-2); color: var(--ink); font: 500 13px var(--sans);
+    height: 34px; padding: 0 14px; border-radius: 999px; cursor: pointer;
+  }
+  .copy:hover { background: var(--rule); }
+
+  /* Section scaffolding */
+  section { padding-block: clamp(56px, 9vw, 104px); }
+  .section-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-bottom: clamp(32px, 5vw, 56px); }
+  .label { font-family: var(--mono); font-size: 13px; color: var(--muted); margin: 0; }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 5vw, 56px); line-height: 1.04; letter-spacing: -.015em; margin: 0; max-width: 18ch; }
+  h2 em { font-style: italic; }
+  .section-head p:not(.label) { color: var(--muted); max-width: 56ch; margin: 6px 0 0; }
+
+  /* Briefing */
+  .split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
+  .split .section-head { margin-bottom: 0; }
+  .terminal { background: var(--code-bg); color: var(--code-ink); border-radius: 14px; overflow: hidden; }
+  .terminal-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; border-bottom: 1px solid #25221d; font: 12px var(--mono); color: var(--code-muted); }
+  .terminal-bar i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #2f2b25; margin-right: 6px; }
+  .terminal pre { margin: 0; padding: 22px 22px 26px; overflow-x: auto; font: 13.5px/1.7 var(--mono); }
+  .t-cmd { color: var(--code-ink); }
+  .t-cmd::before { content: "$ "; color: #ec7a52; }
+  .t-h { color: #f3efe6; font-weight: 500; }
+  .t-dim { color: var(--code-muted); }
+  .t-warn { color: var(--warn); }
+
+  /* Principles */
+  .principles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--rule); }
+  .principle { padding: 28px 28px 8px 0; }
+  .principle + .principle { padding-left: 28px; border-left: 1px solid var(--rule); }
+  .principle .n { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+  .principle h3 { font-family: var(--serif); font-weight: 400; font-size: 27px; line-height: 1.1; margin: 14px 0 10px; }
+  .principle p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+  /* Dashboard */
+  .shot { margin: 0; }
+  .shot-frame { border: 1px solid var(--rule); border-radius: 14px; overflow: hidden; background: var(--paper-2); box-shadow: 0 30px 60px -40px rgb(21 19 15 / 35%); }
+  .shot figcaption { color: var(--muted); font-size: 15px; margin-top: 18px; max-width: 70ch; }
+
+  /* Steps */
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--rule); }
+  .step { display: grid; grid-template-columns: 64px minmax(0, 4fr) minmax(0, 6fr); gap: 24px; padding-block: 26px; border-bottom: 1px solid var(--rule); align-items: baseline; }
+  .step .n { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+  .step h3 { font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.1; margin: 0; }
+  .step p { margin: 6px 0 0; color: var(--muted); font-size: 15.5px; }
+  .step code.block { display: block; padding: 14px 16px; border-radius: 10px; background: var(--paper-2); overflow-x: auto; white-space: pre; font-size: 13.5px; line-height: 1.65; }
+
+  /* Closing */
+  .closing { text-align: left; }
+  .closing h2 { max-width: 16ch; }
+  .closing .actions { margin-top: 34px; }
+  .word { font-family: var(--serif); font-style: italic; }
+
+  /* Footer */
+  .site-footer { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; padding-block: 28px 40px; color: var(--muted); font-size: 14px; }
+  .site-footer nav { display: flex; gap: 22px; }
+  .site-footer a { text-decoration: none; }
+  .site-footer a:hover { color: var(--ink); }
+
+  @media (max-width: 900px) {
+    .split { grid-template-columns: minmax(0, 1fr); }
+    .principles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .principle, .principle + .principle { padding: 26px 20px 22px 0; border-left: 0; }
+    .principle:nth-child(even) { padding-left: 20px; border-left: 1px solid var(--rule); }
+    .principle:nth-child(n+3) { border-top: 1px solid var(--rule); }
+    .step { grid-template-columns: 40px minmax(0, 1fr); }
+    .step code.block { grid-column: 2; }
+  }
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    .nav a.hide-sm { display: none; }
+    .principles { grid-template-columns: minmax(0, 1fr); }
+    .principle, .principle + .principle, .principle:nth-child(even) { padding: 24px 0 20px; border-left: 0; }
+    .principle + .principle { border-top: 1px solid var(--rule); }
+    .step { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+    .step code.block { grid-column: auto; }
+    .clone { width: 100%; }
+    .clone span { flex: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .button { transition: none; }
+    .button:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap site-header">
+  <a class="brand" href="/" aria-label="Alethic Labs home">
+    <svg class="mark" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.8 18.2 10 10 18.2 1.8 10Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="10" cy="10" r="2.1" fill="var(--accent)"/></svg>
+    Alethic Labs
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a class="hide-sm" href="#how">How it works</a>
+    <a class="hide-sm" href="#dashboard">Dashboard</a>
+    <a href="https://github.com/shubhambaid/alethic">GitHub</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Alethic &middot; open source &middot; pre-release</p>
+    <h1>Context your agents can <em>check.</em></h1>
+    <p class="lede">When an agent session ends, what it learned usually ends with it. <strong>Alethic</strong> keeps unfinished work in the repository and compiles it into a short, cited briefing for whoever continues: Codex, Claude Code, Gemini, or you.</p>
+    <div class="actions">
+      <a class="button" href="https://github.com/shubhambaid/alethic">
+        <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        View on GitHub
+      </a>
+      <div class="clone">
+        <span id="clone-cmd">git clone https://github.com/shubhambaid/alethic.git</span>
+        <button class="copy" type="button" data-copy="git clone https://github.com/shubhambaid/alethic.git" aria-describedby="clone-cmd">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap"><hr class="rule"></div>
+
+  <section class="wrap" aria-labelledby="briefing-title">
+    <div class="split">
+      <div class="section-head">
+        <p class="label">01 &nbsp;The handoff</p>
+        <h2 id="briefing-title">The next agent starts from <em>what was committed</em>, not a lost chat.</h2>
+        <p>Which approach failed and why, what was decided, which checks ran against which code. Every line cites the record it came from, and anything unconfirmed or stale says so.</p>
+      </div>
+      <div class="terminal" role="img" aria-label="Example alethic resume briefing">
+        <div class="terminal-bar"><span><i></i><i></i><i></i></span><span>auth-service</span></div>
+<pre><span class="t-cmd">alethic resume --budget 2500</span>
+
+<span class="t-h">## Verified behavior and checks run</span>
+- `node --test` failed (exit 1) at 87e0b47
+  <span class="t-dim">(code unchanged since)</span>
+  <span class="t-dim">(receipt rcpt-node-test-20260914t094000z)</span> <span class="t-warn">⚠ unverified</span>
+
+<span class="t-h">## Failed approaches</span>
+- Delete session rows on reset. Failed because:
+  refresh() reads the refresh cache first, so
+  cached sessions keep working.
+  <span class="t-dim">[cp-invalidate-sessions-…-094000z]</span> <span class="t-warn">⚠ unverified</span>
+
+<span class="t-h">## Next safe action</span>
+- Bump users.tokenVersion on reset and compare
+  it in refresh().
+  <span class="t-dim">[cp-invalidate-sessions-…-094000z]</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="principles-title">
+    <div class="section-head">
+      <p class="label">02 &nbsp;Principles</p>
+      <h2 id="principles-title">Small files, honest labels, <em>no service.</em></h2>
+    </div>
+    <div class="principles">
+      <div class="principle">
+        <span class="n">i.</span>
+        <h3>Plain files in Git</h3>
+        <p>One YAML record per file under <code>.alethic/</code>. They show up in pull requests and merge like code. No account, database, or network access.</p>
+      </div>
+      <div class="principle">
+        <span class="n">ii.</span>
+        <h3>Anchored to code</h3>
+        <p>Records fingerprint the files they describe. When that code changes, the record is flagged <em>may be stale</em>, and it survives squash merges and rebases.</p>
+      </div>
+      <div class="principle">
+        <span class="n">iii.</span>
+        <h3>Honest trust</h3>
+        <p>Agent claims are marked unverified. A human confirmation is an attribution tied to the exact text, never shown as authenticated approval.</p>
+      </div>
+      <div class="principle">
+        <span class="n">iv.</span>
+        <h3>Agent-neutral</h3>
+        <p>A CLI any agent can run, short blocks for <code>AGENTS.md</code>, <code>CLAUDE.md</code>, and <code>GEMINI.md</code>, and an MCP server.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="how" aria-labelledby="how-title">
+    <div class="section-head">
+      <p class="label">03 &nbsp;How it works</p>
+      <h2 id="how-title">Three commands carry the work <em>across sessions.</em></h2>
+    </div>
+    <ol class="steps">
+      <li class="step">
+        <span class="n">01</span>
+        <div><h3>Set up</h3><p>Create <code>.alethic/</code> and tell agents to start from a briefing.</p></div>
+        <code class="block">alethic init
+alethic render agents-md --write</code>
+      </li>
+      <li class="step">
+        <span class="n">02</span>
+        <div><h3>Leave a checkpoint</h3><p>Before stopping, record what failed, what ran, and the next safe step.</p></div>
+        <code class="block">alethic receipt run -- npm test
+alethic checkpoint create \
+  --failed "Delete session rows::cache still serves them" \
+  --next "Compare a token version on refresh"</code>
+      </li>
+      <li class="step">
+        <span class="n">03</span>
+        <div><h3>Resume anywhere</h3><p>A fresh session, any agent, compiles a cited briefing within a budget.</p></div>
+        <code class="block">alethic resume --budget 2500
+alethic validate</code>
+      </li>
+    </ol>
+  </section>
+
+  <section class="wrap" id="dashboard" aria-labelledby="dashboard-title">
+    <div class="section-head">
+      <p class="label">04 &nbsp;Dashboard</p>
+      <h2 id="dashboard-title">See every session, record, and handoff <em>in one place.</em></h2>
+    </div>
+    <figure class="shot">
+      <div class="shot-frame">
+        <picture>
+          <source srcset="assets/dashboard.webp" type="image/webp">
+          <img src="assets/dashboard.png" width="2000" height="1250" loading="lazy" decoding="async"
+               alt="The Alethic dashboard: lanes for Codex, Claude Code, and Gemini sessions with their records, and an inspector showing a decision whose evidence changed.">
+        </picture>
+      </div>
+      <figcaption><code>alethic dashboard</code> serves a read-only page on your machine. Here a code edit contradicts an earlier decision, so the decision is flagged and its evidence is compared file by file.</figcaption>
+    </figure>
+  </section>
+
+  <div class="wrap"><hr class="rule"></div>
+
+  <section class="wrap closing" aria-labelledby="closing-title">
+    <p class="label">From <span class="word">alētheia</span>, the Greek for unconcealment</p>
+    <h2 id="closing-title">Nothing learned should stay hidden in a closed session.</h2>
+    <div class="actions">
+      <a class="button" href="https://github.com/shubhambaid/alethic">Read the docs on GitHub</a>
+      <a href="https://github.com/shubhambaid/alethic/blob/main/docs/spec.md">Specification</a>
+    </div>
+  </section>
+</main>
+
+<div class="wrap"><hr class="rule"></div>
+<footer class="wrap site-footer">
+  <span>&copy; <span id="year">2026</span> Alethic Labs &middot; Apache-2.0</span>
+  <nav aria-label="Footer">
+    <a href="https://github.com/shubhambaid/alethic">GitHub</a>
+    <a href="https://github.com/shubhambaid/alethic/blob/main/ROADMAP.md">Roadmap</a>
+  </nav>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  for (const button of document.querySelectorAll("[data-copy]")) {
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copy);
+        button.textContent = "Copied";
+      } catch {
+        button.textContent = "Select and copy";
+      }
+      setTimeout(() => { button.textContent = "Copy"; }, 1600);
+    });
+  }
+</script>
+</body>
+</html>
