@@ -123,12 +123,12 @@
   .briefing .warn { color: var(--signal-soft); }
   /* Reel */
   .reel { padding-block: clamp(40px, 6vw, 72px); border-top: 1px solid var(--line); }
-  .reel .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
-  .reel-copy { display: flex; flex-direction: column; gap: 16px; }
+  .reel .wrap { display: flex; flex-direction: column; gap: clamp(24px, 3vw, 36px); }
+  .reel-copy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px clamp(28px, 5vw, 72px); align-items: end; }
+  .reel-copy .reel-title { display: flex; flex-direction: column; gap: 14px; }
   .reel-copy h2 { font-size: clamp(34px, 4.2vw, 54px); line-height: 1.04; }
   .reel-copy p { margin: 0; color: var(--muted); max-width: 32em; }
-  .reel-copy ol { margin: 4px 0 0; padding-left: 1.2em; color: var(--muted); display: grid; gap: 4px; font-size: 15.5px; }
-  .reel video { display: block; width: 100%; height: auto; aspect-ratio: 1; border: 1px solid var(--line-strong); border-radius: 20px; background: var(--ground); }
+  .reel video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 1px solid var(--line-strong); border-radius: 20px; background: var(--ground); }
 
   /* Research */
   .research { border-block: 1px solid var(--line); }
@@ -215,7 +215,7 @@
     .steps, .features { grid-template-columns: minmax(0, 1fr); }
   }
   @media (max-width: 860px) {
-    .reel .wrap { grid-template-columns: minmax(0, 1fr); }
+    .reel-copy { grid-template-columns: minmax(0, 1fr); }
   }
   @media (max-width: 720px) {
     .hide-sm { display: none; }
@@ -303,18 +303,14 @@
   <section class="reel" id="reel" aria-labelledby="reel-title">
     <div class="wrap">
       <div class="reel-copy">
-        <p class="eyebrow">48 seconds</p>
-        <h2 id="reel-title">Two agents, two branches, <em class="accent">one briefing.</em></h2>
-        <p>claude-code changes what <code>signIn()</code> returns on its own branch. codex, on main, gets told before it builds on the old shape. Every terminal line is real output from the <code>concurrent-change</code> evaluation scenario.</p>
-        <ol>
-          <li>The diff on the other branch</li>
-          <li>The concurrent-work section of <code>alethic resume</code></li>
-          <li><code>show --ref</code> and <code>status --all-branches</code></li>
-          <li>The dashboard</li>
-        </ol>
+        <div class="reel-title">
+          <p class="eyebrow">Walkthrough · 1 minute</p>
+          <h2 id="reel-title">The dashboard, <em class="accent">click by click.</em></h2>
+        </div>
+        <p>A recording of <code>alethic dashboard</code> on the demo repository, where one task passed from codex to claude-code to gemini: session lanes, a decision whose evidence changed, the attention filter, the timeline, health, the table, and the briefing at two budgets.</p>
       </div>
-      <video src="assets/reel.mp4" poster="assets/reel-poster.jpg" width="1080" height="1080" controls muted playsinline preload="metadata" aria-describedby="reel-title">
-        <a href="assets/reel.mp4">Download the 48-second walkthrough (MP4)</a>
+      <video src="assets/dashboard-walkthrough.mp4" poster="assets/dashboard-walkthrough-poster.jpg" width="1920" height="1080" controls muted playsinline preload="metadata" aria-describedby="reel-title">
+        <a href="assets/dashboard-walkthrough.mp4">Download the dashboard walkthrough (MP4)</a>
       </video>
     </div>
   </section>
