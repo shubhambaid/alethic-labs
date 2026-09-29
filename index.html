@@ -323,6 +323,7 @@
     <nav class="nav-links" aria-label="Primary">
       <a class="hide-sm" href="#how">How it works</a>
       <a class="hide-sm" href="#dashboard">Dashboard</a>
+      <a class="hide-sm" href="#new">What's new</a>
       <a class="pill" href="https://github.com/shubhambaid/alethic">
         <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
         GitHub
@@ -503,6 +504,41 @@ alethic validate</pre></div>
       </div>
     </figure>
     <p class="shot-caption">A read-only page on your machine. Here a code edit contradicts an earlier decision, so the decision is flagged and its evidence is compared file by file.</p>
+  </section>
+
+  <section class="wrap" id="new" aria-labelledby="new-title">
+    <div class="section-head">
+      <p class="eyebrow"><span class="tag tag-orange">What's new</span></p>
+      <h2 id="new-title">Stricter about what a briefing <span class="soft">may claim.</span></h2>
+      <p class="section-lede">Records are checked before they reach a briefing, checks are tied to the code that ran, and concurrent sessions stay out of each other's way.</p>
+    </div>
+    <div class="cards">
+      <article class="card glass">
+        <div class="card-icon ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></div>
+        <h3>Checked before compiled</h3>
+        <p>Briefings, PR summaries, MCP resources, and the dashboard apply the same rules as <code>validate</code>. Invalid, forged, or secret-bearing records are withheld and reported.</p>
+      </article>
+      <article class="card glass">
+        <div class="card-icon ic-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m7 9 3 3-3 3M13 15h4"/></svg></div>
+        <h3>Receipts that ran</h3>
+        <p><code>alethic receipt run</code> observes the check itself and records content digests before and after, so a pass stops applying once that code changes.</p>
+      </article>
+      <article class="card glass">
+        <div class="card-icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h6"/></svg></div>
+        <h3>Bounded briefings</h3>
+        <p>Briefings stay within budget as the ledger grows, with capped pointer lines and <code>alethic show</code> for any full record.</p>
+      </article>
+      <article class="card glass">
+        <div class="card-icon ic-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v12M18 9v12"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/></svg></div>
+        <h3>Parallel sessions</h3>
+        <p>Sessions are named, leases are session-aware, and record writes are locked and version-checked, so competing claims surface instead of overwriting.</p>
+      </article>
+    </div>
+
+    <div class="callout glass">
+      <span class="emoji" aria-hidden="true">📊</span>
+      <p>Why structured handoffs: in independent research, successor agents given structured or summary notes used 20–59% fewer steps and 42–63% fewer prompt tokens than agents given only the repository, though solve rates moved less (<a href="https://arxiv.org/abs/2606.02875">Handoff Debt, arXiv:2606.02875</a>). That study did not test Alethic. Our <a href="https://github.com/shubhambaid/alethic/blob/main/docs/evaluation.md">evaluation kit</a> is ready; live results are not in yet.</p>
+    </div>
   </section>
 
   <section class="wrap closing" aria-labelledby="closing-title">
