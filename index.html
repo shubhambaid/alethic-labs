@@ -350,12 +350,12 @@
     <div class="wrap">
       <div class="stat">
         <b>82%</b>
-        <p>of parallel-agent runs that failed on merge were recovered when the agent got a message describing the other agent's finished change.
-          <small>Outside research: <a href="https://arxiv.org/abs/2609.25396">Passes Alone, Fails Together, arXiv:2609.25396</a>. It did not test Alethic.</small></p>
+        <p>of interfering parallel-agent runs recovered, on constructed tasks, when the agent got a message describing the other agent's finished change.
+          <small>Outside research: <a href="https://arxiv.org/abs/2609.25396">Passes Alone, Fails Together, arXiv:2609.25396</a>. On real merged pull requests the authors found such interference rare, and say constructed rates don't estimate how often it happens. It did not test Alethic.</small></p>
       </div>
       <div class="stat">
         <b>42–63%</b>
-        <p>fewer prompt tokens when a successor agent got structured or summary handoff notes instead of the repository alone; solve rates moved less.
+        <p>fewer prompt tokens when a successor agent got a handoff (a raw trace, summary notes, or structured notes) instead of the repository alone; solve rates moved less.
           <small>Outside research: <a href="https://arxiv.org/abs/2606.02875">Handoff Debt, arXiv:2606.02875</a>. It did not test Alethic.</small></p>
       </div>
     </div>
@@ -436,8 +436,7 @@ assert.equal(refresh(token).status, 401);</pre>
           <p>Runs the check through Alethic, then leaves a checkpoint: what failed, why, and the next safe step.</p>
           <pre>alethic receipt run -- npm test
 alethic checkpoint create \
-  --failed "Delete session rows::the
-    refresh cache still serves them" \
+  --failed "Delete session rows::the refresh cache still serves them" \
   --next "Compare a token version"</pre>
         </article>
         <article class="step">
