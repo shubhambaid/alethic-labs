@@ -34,9 +34,6 @@
     --signal-bg: #17130c;
     --lane: #6ccbff;
     --lane-2: #93a7c4;
-    --good: #9fe2b0;
-    --bad: #ff9a9a;
-    --bad-bg: #1b1213;
     --serif: "Bodoni Moda", Didot, "Iowan Old Style", Georgia, serif;
     --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
     --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
@@ -94,9 +91,11 @@
 
   /* Hero */
   .hero { padding-block: clamp(48px, 8vw, 96px) clamp(36px, 5vw, 56px); }
-  .hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
-  .hero-copy { display: flex; flex-direction: column; gap: 26px; }
-  .hero h1 { font-size: clamp(46px, 6.6vw, 90px); line-height: 1.06; }
+  .hero .wrap { display: flex; flex-direction: column; gap: clamp(36px, 5vw, 56px); }
+  .hero-copy { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px clamp(32px, 5vw, 72px); align-items: end; }
+  .hero-title { display: flex; flex-direction: column; gap: 22px; }
+  .hero-side { display: flex; flex-direction: column; gap: 22px; }
+  .hero h1 { font-size: clamp(44px, 6vw, 84px); line-height: 1.06; }
   .lede { margin: 0; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.55; color: var(--muted); max-width: 34em; }
   .actions { display: flex; flex-wrap: wrap; gap: 12px; }
   .cmd {
@@ -113,37 +112,15 @@
   .copy:hover { background: #1a1d23; }
 
   .hero-visual { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
-  .lanes { border: 1px solid var(--line); border-radius: 20px; background: var(--raised); padding: 18px 18px 12px; }
-  .lanes-title { margin: 0 0 6px 6px; font: 500 12px/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
-  .lanes svg { display: block; width: 100%; height: auto; }
-  .lanes text { font-family: var(--mono); font-size: 12px; }
-  .draw { stroke-dasharray: 900; stroke-dashoffset: 900; animation: draw 1.4s cubic-bezier(.3, .7, .2, 1) forwards; }
-  .draw.d2 { animation-delay: .45s; }
-  .draw.d3 { animation-delay: .8s; }
-  .pop { opacity: 0; animation: pop .5s ease forwards; }
-  .pop.p1 { animation-delay: 1.1s; }
-  .pop.p2 { animation-delay: 1.5s; }
-  .pop.p3 { animation-delay: 1.9s; }
-  .flare-ring { transform-box: fill-box; transform-origin: center; animation: pulse 2.4s ease-out 1.9s infinite; opacity: 0; }
-  @keyframes draw { to { stroke-dashoffset: 0; } }
-  @keyframes pop { to { opacity: 1; } }
-  @keyframes pulse { 0% { transform: scale(.6); opacity: .55; } 100% { transform: scale(2.3); opacity: 0; } }
 
   .window { border: 1px solid var(--line-strong); border-radius: 20px; background: var(--panel); overflow: hidden; }
   .window-bar { display: flex; align-items: center; gap: 8px; padding: 12px 18px; border-bottom: 1px solid var(--line); }
   .window-bar i { width: 10px; height: 10px; border-radius: 50%; background: #3a3f49; }
   .window-bar span { flex: 1; text-align: center; font: 400 12px/1.4 var(--mono); color: var(--faint); padding-right: 46px; }
   .briefing { margin: 0; padding: 18px 22px 22px; display: grid; gap: 6px; font: 400 13.5px/1.65 var(--mono); color: var(--soft); }
-  .briefing p { margin: 0; }
+  .briefing p { margin: 0; overflow-wrap: anywhere; }
   .briefing .h { color: var(--signal); font-weight: 500; }
   .briefing .warn { color: var(--signal-soft); }
-  .briefing p { opacity: 0; transform: translateY(4px); animation: line .45s ease forwards; }
-  .briefing p:nth-child(1) { animation-delay: 1.3s; }
-  .briefing p:nth-child(2) { animation-delay: 1.55s; }
-  .briefing p:nth-child(3) { animation-delay: 1.8s; }
-  .briefing p:nth-child(4) { animation-delay: 2.05s; }
-  @keyframes line { to { opacity: 1; transform: none; } }
-
   /* Research */
   .research { border-block: 1px solid var(--line); }
   .research .wrap { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -162,31 +139,11 @@
   .head .side { margin: 0; max-width: 380px; font-size: 15.5px; color: var(--muted); }
 
   /* Concurrent */
-  .segmented { display: inline-flex; padding: 4px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--panel); }
-  .segmented button {
-    min-height: 44px; padding: 0 20px; border: 0; border-radius: 999px; background: transparent;
-    color: var(--muted); font: 500 15px/1 var(--sans); cursor: pointer;
-  }
-  .segmented button[aria-pressed="true"][data-mode="with"] { background: var(--signal); color: var(--signal-ink); font-weight: 600; }
-  .segmented button[aria-pressed="true"][data-mode="without"] { background: var(--bad); color: #1a1112; font-weight: 600; }
-  .branches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
-  .branch { border: 1px solid var(--line); border-radius: 20px; background: var(--raised); padding: clamp(20px, 2.4vw, 28px); display: flex; flex-direction: column; gap: 14px; min-width: 0; }
-  .branch .who { font: 500 12px/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
-  .branch .who.lane { color: var(--lane); }
-  .branch h3 { font-family: var(--sans); font-size: 19px; font-weight: 500; letter-spacing: -.01em; }
-  .branch pre { margin: 0; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--ground); font: 400 13.5px/1.7 var(--mono); color: var(--soft); overflow-x: auto; }
-  .ok { display: flex; align-items: center; gap: 10px; font: 400 13px/1.4 var(--mono); color: var(--good); }
-  .ok::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
-  .outcome { margin-top: 20px; border-radius: 20px; padding: clamp(20px, 2.6vw, 30px); }
-  .outcome[hidden] { display: none !important; }
-  .outcome.bad { border: 1px solid #5a2a2a; background: var(--bad-bg); display: flex; gap: clamp(16px, 3vw, 28px); align-items: flex-start; }
-  .outcome.bad b { font: 400 clamp(34px, 4vw, 46px)/1 var(--serif); color: var(--bad); }
-  .outcome.bad h3 { font-family: var(--sans); font-size: 19px; font-weight: 500; letter-spacing: -.01em; margin-bottom: 6px; }
-  .outcome.bad p { margin: 4px 0 0; color: var(--muted); font-size: 15.5px; }
-  .outcome.bad code { color: #f0c2c2; font-size: 13.5px; }
-  .outcome.good { border: 1px solid var(--signal); background: var(--signal-bg); }
-  .outcome.good .briefing { padding: 0; color: #dcd4c3; }
-  .outcome.good .briefing p { opacity: 1; transform: none; animation: none; }
+  .output { border-color: var(--signal); background: var(--signal-bg); }
+  .output .window-bar { border-bottom-color: #3a2f1c; }
+  .output .briefing { color: #dcd4c3; }
+  .source { margin: 14px 4px 0; font-size: 14px; color: var(--faint); }
+  .source code { color: var(--soft); font-size: 13px; }
   .rules { margin-top: clamp(28px, 4vw, 44px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
   .rule { border-top: 1px solid var(--line-strong); padding-top: 16px; }
   .rule .mono { font-size: 12.5px; color: var(--signal); }
@@ -225,8 +182,8 @@
     display: grid; place-items: center; border-radius: 50%; background: var(--signal); color: var(--signal-ink);
     font: 500 clamp(12px, 1.1vw, 15px)/1 var(--mono); box-shadow: 0 0 0 6px rgba(12, 13, 16, .5);
   }
-  .legend { margin: 24px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
-  .legend li { display: flex; gap: 12px; font-size: 15px; color: var(--muted); }
+  .legend { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px 24px; }
+  .legend li { display: flex; gap: 12px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
   .legend li span { font: 500 14px/1.6 var(--mono); color: var(--signal); }
   .legend strong { color: var(--text); font-weight: 500; }
 
@@ -244,23 +201,20 @@
   footer a:hover { color: var(--text); }
 
   @media (max-width: 960px) {
-    .hero .wrap { grid-template-columns: minmax(0, 1fr); }
+    .hero-copy { grid-template-columns: minmax(0, 1fr); align-items: start; }
     .rules, .legend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .steps, .features { grid-template-columns: minmax(0, 1fr); }
   }
   @media (max-width: 720px) {
     .hide-sm { display: none; }
-    .research .wrap, .branches { grid-template-columns: minmax(0, 1fr); }
+    .research .wrap { grid-template-columns: minmax(0, 1fr); }
     .stat + .stat { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
     .stat { flex-direction: column; gap: 8px; }
-    .outcome.bad { flex-direction: column; }
     .rules, .legend { grid-template-columns: minmax(0, 1fr); }
     .window-bar span { padding-right: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .draw, .pop, .flare-ring, .briefing p { animation: none; opacity: 1; stroke-dashoffset: 0; transform: none; }
-    .flare-ring { opacity: 0; }
     .btn { transition: none; }
     .btn:hover { transform: none; }
   }
@@ -290,58 +244,45 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap">
       <div class="hero-copy">
-        <p class="eyebrow">New · concurrent-work notices</p>
-        <h1 id="hero-title">Your agents work in parallel. Now they <em class="accent">know&nbsp;it.</em></h1>
-        <p class="lede">Alethic keeps unfinished work in the repository as small, checked records. The next agent gets a cited briefing, including what other branches and worktrees changed in its scope since they split.</p>
-        <div class="actions">
-          <a class="btn btn-signal" href="https://github.com/shubhambaid/alethic">Get started on GitHub</a>
-          <a class="btn" href="https://github.com/shubhambaid/alethic/blob/main/docs/spec.md">Read the spec</a>
+        <div class="hero-title">
+          <p class="eyebrow">New · concurrent-work notices</p>
+          <h1 id="hero-title">Your agents work in parallel. Now they <em class="accent">know&nbsp;it.</em></h1>
         </div>
-        <div class="cmd">
-          <span class="prompt" aria-hidden="true">$</span>
-          <span class="text" id="clone-cmd">git clone https://github.com/shubhambaid/alethic.git</span>
-          <button class="copy" type="button" data-copy="git clone https://github.com/shubhambaid/alethic.git" aria-describedby="clone-cmd">Copy</button>
+        <div class="hero-side">
+          <p class="lede">Alethic keeps unfinished work in the repository as small, checked records. The next agent gets a cited briefing, including what other branches and worktrees changed in its scope since they split.</p>
+          <div class="actions">
+            <a class="btn btn-signal" href="https://github.com/shubhambaid/alethic">Get started on GitHub</a>
+            <a class="btn" href="https://github.com/shubhambaid/alethic/blob/main/docs/spec.md">Read the spec</a>
+          </div>
+          <div class="cmd">
+            <span class="prompt" aria-hidden="true">$</span>
+            <span class="text" id="clone-cmd">git clone https://github.com/shubhambaid/alethic.git</span>
+            <button class="copy" type="button" data-copy="git clone https://github.com/shubhambaid/alethic.git" aria-describedby="clone-cmd">Copy</button>
+          </div>
         </div>
       </div>
 
-      <div class="hero-visual">
-        <figure class="lanes" style="margin:0">
-          <figcaption class="lanes-title">Lines of work in this clone</figcaption>
-          <svg viewBox="0 0 560 250" role="img" aria-labelledby="lanes-desc">
-            <desc id="lanes-desc">You are on main. A worktree on feat/token-refresh, where claude-code works, changed refresh() in your scope; Alethic flags it. A branch on feat/docs, where gemini works, stays outside your scope.</desc>
-            <path class="draw" d="M16 206 H548" stroke="#eceae3" stroke-width="2" fill="none"/>
-            <path class="draw d2" d="M104 206 V74 Q104 50 128 50 H548" stroke="#6ccbff" stroke-width="2" fill="none"/>
-            <path class="draw d3" d="M250 206 V160 Q250 138 272 138 H548" stroke="#93a7c4" stroke-width="2" fill="none"/>
-            <circle cx="56" cy="206" r="6" fill="#eceae3"/>
-            <circle cx="500" cy="206" r="9" fill="#0c0d10" stroke="#eceae3" stroke-width="3"/>
-            <text x="16" y="234" fill="#eceae3">main · codex · you are here</text>
-            <g class="pop p1">
-              <text x="140" y="32" fill="#6ccbff">feat/token-refresh · claude-code · worktree</text>
-              <circle cx="176" cy="50" r="5.5" fill="#101216" stroke="#6ccbff" stroke-width="2"/>
-              <circle cx="470" cy="50" r="5.5" fill="#101216" stroke="#6ccbff" stroke-width="2"/>
-            </g>
-            <g class="pop p2">
-              <text x="268" y="128" fill="#a9b8cd">feat/docs · gemini · outside your scope</text>
-              <circle cx="420" cy="138" r="5.5" fill="#101216" stroke="#93a7c4" stroke-width="2"/>
-            </g>
-            <g class="pop p3">
-              <circle class="flare-ring" cx="300" cy="50" r="11" fill="#ffb547"/>
-              <circle cx="300" cy="50" r="10" fill="#ffb547"/>
-              <rect x="236" y="64" width="306" height="30" rx="8" fill="#1b1710" stroke="#ffb547"/>
-              <text x="250" y="84" fill="#ffd79a">refresh() returns {access, refresh}</text>
-            </g>
-          </svg>
-        </figure>
-
-        <div class="window">
-          <div class="window-bar"><i></i><i></i><i></i><span>alethic resume · briefing for codex</span></div>
-          <div class="briefing">
-            <p class="h">## Concurrent work on other branches</p>
-            <p>- feat/token-refresh (worktree ../wt-refresh; uncommitted changes) changed 1 file in your scope (src/auth/refresh.js) and recorded 2 items about it.</p>
-            <p>- [dec-auth-refresh-return-shape on feat/token-refresh] Decided: refresh() returns {access, refresh} instead of a string. <span class="warn">⚠ unverified</span></p>
-            <p class="dim">- None of this is merged here. Check it before relying on the code it touches.</p>
+      <div class="hero-visual" id="dashboard">
+        <figure class="shot">
+          <div class="window-bar"><i></i><i></i><i></i><span>alethic dashboard · 127.0.0.1:4700</span></div>
+          <div class="shot-frame">
+            <picture>
+              <source srcset="assets/dashboard.webp" type="image/webp">
+              <img src="assets/dashboard.png" width="2000" height="1250" decoding="async" fetchpriority="high"
+                   alt="The Alethic dashboard: filters on the left, one lane per agent session with its records and inferred handoffs in the middle, and an inspector on the right showing a decision whose evidence changed, compared file by file.">
+            </picture>
+            <span class="marker" style="left:13%;top:35%" aria-hidden="true">1</span>
+            <span class="marker" style="left:30%;top:28.6%" aria-hidden="true">2</span>
+            <span class="marker" style="left:40%;top:22%" aria-hidden="true">3</span>
+            <span class="marker" style="left:76%;top:66%" aria-hidden="true">4</span>
           </div>
-        </div>
+        </figure>
+        <ol class="legend" aria-label="What the dashboard shows">
+          <li><span>1</span><div><strong>Filters.</strong> Sessions, task, trust level, branch, and only what needs attention.</div></li>
+          <li><span>2</span><div><strong>Session lanes.</strong> One lane per agent session, with the records it wrote.</div></li>
+          <li><span>3</span><div><strong>Handoffs.</strong> Inferred from the order of work, and labeled as inferred.</div></li>
+          <li><span>4</span><div><strong>Inspector.</strong> A decision whose evidence changed, compared file by file.</div></li>
+        </ol>
       </div>
     </div>
   </section>
@@ -368,48 +309,20 @@
           <p class="eyebrow">Concurrent-work notices</p>
           <h2 id="concurrent-title">Passes alone. <em class="dim">Fails together.</em> Unless someone says so.</h2>
         </div>
-        <div class="segmented" role="group" aria-label="Compare the outcome">
-          <button type="button" data-mode="without" aria-pressed="false" aria-controls="outcome-without">Without Alethic</button>
-          <button type="button" data-mode="with" aria-pressed="true" aria-controls="outcome-with">With Alethic</button>
-        </div>
+        <p class="side">When another branch or worktree in this clone changes files in your task's scope, or records a decision about it, the next briefing says so, before the merge does.</p>
       </div>
 
-      <div class="branches">
-        <article class="branch">
-          <div class="who">main · codex</div>
-          <h3>Add signOutEverywhere(userId), with a test</h3>
-          <pre>const token = signIn("u1");
-signOutEverywhere("u1");
-assert.equal(refresh(token).status, 401);</pre>
-          <div class="ok">node --test · pass 4 · fail 0</div>
-        </article>
-        <article class="branch">
-          <div class="who lane">feat/token-pair · claude-code · not merged</div>
-          <h3>signIn() returns an access and refresh pair</h3>
-          <pre>export function signIn(userId) {
-  …
-  return { access, refresh: token };
-}</pre>
-          <div class="ok">node --test · pass 4 · fail 0</div>
-        </article>
-      </div>
-
-      <div class="outcome bad" id="outcome-without" hidden>
-        <b>merge</b>
-        <div>
-          <h3>Both branches were green. The merge is red.</h3>
-          <code>refresh(token) receives { access, refresh }: expected 401, received 200</code>
-          <p>Nothing told codex that another agent was changing what signIn() returns.</p>
-        </div>
-      </div>
-      <div class="outcome good" id="outcome-with">
+      <div class="window output">
+        <div class="window-bar"><i></i><i></i><i></i><span>alethic resume · briefing for codex</span></div>
         <div class="briefing">
           <p class="h">## Concurrent work on other branches</p>
           <p>- feat/token-pair (last commit 2026-09-14) changed 1 file in your scope (src/sessions.js) and recorded 2 items about it since it split from this branch at a11385b.</p>
-          <p>- [dec-auth-sign-in-result on feat/token-pair] Decided on auth.sign-in-result: signIn(userId) returns { access, refresh } instead of a token string. <span class="warn">⚠ unverified</span></p>
-          <p class="dim">- None of this is merged here. Check it before relying on the code it touches.</p>
+          <p>- [task-token-pair on feat/token-pair] active task by claude-code: Issue a separate access token and refresh token at sign-in. <span class="warn">⚠ unverified</span></p>
+          <p>- [dec-auth-sign-in-result on feat/token-pair] Decided on auth.sign-in-result: signIn(userId) returns { access, refresh } instead of a token string; refresh() takes the refresh… <span class="warn">⚠ unverified</span></p>
+          <p class="dim">- None of this is merged here. Check it before relying on the code it touches; read a record with `alethic show &lt;id&gt; --ref &lt;branch or worktree&gt;`.</p>
         </div>
       </div>
+      <p class="source">Unedited output from the <code>concurrent-change</code> scenario in the evaluation kit: <code>examples/eval/build-scenario.sh concurrent-change alethic</code>, then <code>alethic resume</code>.</p>
 
       <div class="rules">
         <div class="rule"><span class="mono">01 · since the split</span><p>Only what changed after the merge base. Records every branch inherited stay out.</p></div>
@@ -510,38 +423,6 @@ alethic task close &lt;id&gt;</pre>
     </div>
   </section>
 
-  <section class="block" id="dashboard" aria-labelledby="dashboard-title" style="padding-top:0">
-    <div class="wrap">
-      <div class="head">
-        <div class="head-copy">
-          <p class="eyebrow">alethic dashboard</p>
-          <h2 id="dashboard-title">Every session, record, and handoff. <em class="dim">On your machine.</em></h2>
-        </div>
-        <p class="side">Read-only and local. Every relationship says whether a record states it or it was inferred; nothing claims an agent read a record.</p>
-      </div>
-      <figure class="shot">
-        <div class="window-bar"><i></i><i></i><i></i><span>127.0.0.1:4700</span></div>
-        <div class="shot-frame">
-          <picture>
-            <source srcset="assets/dashboard.webp" type="image/webp">
-            <img src="assets/dashboard.png" width="2000" height="1250" loading="lazy" decoding="async"
-                 alt="The Alethic dashboard: filters on the left, one lane per agent session with its records and inferred handoffs in the middle, and an inspector on the right showing a decision whose evidence changed, compared file by file.">
-          </picture>
-          <span class="marker" style="left:13%;top:35%" aria-hidden="true">1</span>
-          <span class="marker" style="left:30%;top:28.6%" aria-hidden="true">2</span>
-          <span class="marker" style="left:40%;top:22%" aria-hidden="true">3</span>
-          <span class="marker" style="left:76%;top:66%" aria-hidden="true">4</span>
-        </div>
-      </figure>
-      <ol class="legend">
-        <li><span>1</span><div><strong>Filters.</strong> Sessions, task, trust level, branch, and only what needs attention.</div></li>
-        <li><span>2</span><div><strong>Session lanes.</strong> One lane per agent session, with the records it wrote.</div></li>
-        <li><span>3</span><div><strong>Handoffs.</strong> Inferred from the order of work, and labeled as inferred.</div></li>
-        <li><span>4</span><div><strong>Inspector.</strong> A decision whose evidence changed, compared file by file.</div></li>
-      </ol>
-    </div>
-  </section>
-
   <section class="block closing" aria-labelledby="closing-title">
     <div class="wrap">
       <p class="eyebrow">From <span class="word">alētheia</span>, Greek for unconcealment</p>
@@ -580,14 +461,6 @@ alethic task close &lt;id&gt;</pre>
     });
   }
 
-  const modes = document.querySelectorAll("[data-mode]");
-  for (const button of modes) {
-    button.addEventListener("click", () => {
-      for (const b of modes) b.setAttribute("aria-pressed", String(b === button));
-      document.getElementById("outcome-with").hidden = button.dataset.mode !== "with";
-      document.getElementById("outcome-without").hidden = button.dataset.mode !== "without";
-    });
-  }
 </script>
 </body>
 </html>
