@@ -121,6 +121,15 @@
   .briefing p { margin: 0; overflow-wrap: anywhere; }
   .briefing .h { color: var(--signal); font-weight: 500; }
   .briefing .warn { color: var(--signal-soft); }
+  /* Reel */
+  .reel { padding-block: clamp(40px, 6vw, 72px); border-top: 1px solid var(--line); }
+  .reel .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+  .reel-copy { display: flex; flex-direction: column; gap: 16px; }
+  .reel-copy h2 { font-size: clamp(34px, 4.2vw, 54px); line-height: 1.04; }
+  .reel-copy p { margin: 0; color: var(--muted); max-width: 32em; }
+  .reel-copy ol { margin: 4px 0 0; padding-left: 1.2em; color: var(--muted); display: grid; gap: 4px; font-size: 15.5px; }
+  .reel video { display: block; width: 100%; height: auto; aspect-ratio: 1; border: 1px solid var(--line-strong); border-radius: 20px; background: var(--ground); }
+
   /* Research */
   .research { border-block: 1px solid var(--line); }
   .research .wrap { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -205,6 +214,9 @@
     .rules, .legend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .steps, .features { grid-template-columns: minmax(0, 1fr); }
   }
+  @media (max-width: 860px) {
+    .reel .wrap { grid-template-columns: minmax(0, 1fr); }
+  }
   @media (max-width: 720px) {
     .hide-sm { display: none; }
     .research .wrap { grid-template-columns: minmax(0, 1fr); }
@@ -229,6 +241,7 @@
       Alethic Labs
     </a>
     <nav class="nav-links" aria-label="Primary">
+      <a class="hide-sm" href="#reel">Watch</a>
       <a class="hide-sm" href="#concurrent">Concurrent work</a>
       <a class="hide-sm" href="#how">How it works</a>
       <a class="hide-sm" href="#dashboard">Dashboard</a>
@@ -284,6 +297,25 @@
           <li><span>4</span><div><strong>Inspector.</strong> A decision whose evidence changed, compared file by file.</div></li>
         </ol>
       </div>
+    </div>
+  </section>
+
+  <section class="reel" id="reel" aria-labelledby="reel-title">
+    <div class="wrap">
+      <div class="reel-copy">
+        <p class="eyebrow">48 seconds</p>
+        <h2 id="reel-title">Two agents, two branches, <em class="accent">one briefing.</em></h2>
+        <p>claude-code changes what <code>signIn()</code> returns on its own branch. codex, on main, gets told before it builds on the old shape. Every terminal line is real output from the <code>concurrent-change</code> evaluation scenario.</p>
+        <ol>
+          <li>The diff on the other branch</li>
+          <li>The concurrent-work section of <code>alethic resume</code></li>
+          <li><code>show --ref</code> and <code>status --all-branches</code></li>
+          <li>The dashboard</li>
+        </ol>
+      </div>
+      <video src="assets/reel.mp4" poster="assets/reel-poster.jpg" width="1080" height="1080" controls muted playsinline preload="metadata" aria-describedby="reel-title">
+        <a href="assets/reel.mp4">Download the 48-second walkthrough (MP4)</a>
+      </video>
     </div>
   </section>
 

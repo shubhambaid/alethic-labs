@@ -5,6 +5,7 @@ The website for [Alethic](https://github.com/shubhambaid/alethic): one static pa
 | File | Purpose |
 |---|---|
 | `index.html` | The page, with its styles and a few lines of script inline. Fonts (Bodoni Moda, IBM Plex Sans, JetBrains Mono) load from Google Fonts. |
+| `assets/reel.mp4`, `assets/reel-poster.jpg` | The 48-second walkthrough (1080×1080, H.264) and its poster frame |
 | `assets/dashboard.webp`, `assets/dashboard.png` | Dashboard screenshot (WebP, with a PNG fallback and social preview) |
 | `favicon.svg` | Site icon |
 | `CNAME` | Custom domain for GitHub Pages |
